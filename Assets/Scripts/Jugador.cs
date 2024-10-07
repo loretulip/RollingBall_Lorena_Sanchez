@@ -15,14 +15,14 @@ public class Jugador : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal"); 
-        float z = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal"); 
+        z = Input.GetAxisRaw("Vertical");
         Saltar();
 
        
