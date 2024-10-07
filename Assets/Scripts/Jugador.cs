@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Jugador : MonoBehaviour
+{
+    Rigidbody rb;
+    [SerializeField] float velocidad,x, z;
+    [SerializeField] int fuerzaSalto, fuerzaMove;
+    [SerializeField] Vector3 direcciónSalto;
+    [SerializeField] int vida = 100;
+    int cubos;
+    Vector3 direccionMove;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxisRaw("Horizontal"); 
+        float z = Input.GetAxisRaw("Vertical");
+        Saltar();
+
+       
+    }
+    private void FixedUpdate()
+    {
+       Movimiento();
+    }
+    void Saltar()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(direcciónSalto * fuerzaSalto, ForceMode.Impulse);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Coleccionable"))
+        {
+            Destroy(other.gameObject);
+            cubos++;
+        }
+        if (other.gameObject.CompareTag("Trampa"))
+        {
+            vida-=10;
+        }
+        if (vida <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    void Movimiento()
+    {
+        direccionMove = new Vector3(x, 0, z);
+        rb.AddForce((direccionMove).normalized * fuerzaMove, ForceMode.Force);
+    }
+}
