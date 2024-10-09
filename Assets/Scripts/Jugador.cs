@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Jugador : MonoBehaviour
@@ -9,7 +10,8 @@ public class Jugador : MonoBehaviour
     [SerializeField] int fuerzaSalto, fuerzaMove;
     [SerializeField] Vector3 direcciónSalto;
     [SerializeField] int vida = 100;
-    int cubos;
+    int puntuacion;
+    [SerializeField] TMP_Text textoPuntuacion,textoVida;
     Vector3 direccionMove;
 
     // Start is called before the first frame update
@@ -43,11 +45,13 @@ public class Jugador : MonoBehaviour
         if (other.gameObject.CompareTag("Coleccionable"))
         {
             Destroy(other.gameObject);
-            cubos++;
+            puntuacion++;
+            textoPuntuacion.SetText("Puntuacion: " + puntuacion);
         }
         if (other.gameObject.CompareTag("Trampa"))
         {
             vida-=10;
+            textoVida.SetText("Vida: "+vida);
         }
         if (vida <= 0)
         {
