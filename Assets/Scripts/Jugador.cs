@@ -48,11 +48,11 @@ public class Jugador : MonoBehaviour
             puntuacion++;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
         }
-        if (other.gameObject.CompareTag("Trampa"))
-        {
-            vida-=10;
-            textoVida.SetText("Vida: "+vida);
-        }
+        //if (other.gameObject.CompareTag("Trampa"))
+        //{
+        //    vida-=10;
+        //    textoVida.SetText("Vida: "+vida);
+        //}
         if (vida <= 0)
         {
             Destroy(gameObject);
