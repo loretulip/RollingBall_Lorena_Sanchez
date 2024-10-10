@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Coleccionable
+  - CamaraTop
+  - CamaraBack
+  - MuroCamara
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Suelo
   - Water
   - UI
   - 

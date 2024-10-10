@@ -12,7 +12,10 @@ public class Jugador : MonoBehaviour
     [SerializeField] int vida = 100;
     int puntuacion;
     [SerializeField] TMP_Text textoPuntuacion,textoVida;
-    Vector3 direccionMove;
+    [SerializeField] GameObject camaraB, camaraRampa;
+    [SerializeField] float distanciaDetecciónSuelo;
+    [SerializeField] LayerMask queEsSuelo;
+    Vector3 direccionMove, direccionRay;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +34,18 @@ public class Jugador : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       Movimiento();
+        Movimiento();
     }
     void Saltar()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(direcciónSalto * fuerzaSalto, ForceMode.Impulse);
+            Debug.Log("salto");
+            if(DetectarSuelo()==true)
+            {
+                rb.AddForce(direcciónSalto * fuerzaSalto, ForceMode.Impulse);
+                Debug.Log("salto2");
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -48,19 +56,30 @@ public class Jugador : MonoBehaviour
             puntuacion++;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
         }
-        //if (other.gameObject.CompareTag("Trampa"))
-        //{
-        //    vida-=10;
-        //    textoVida.SetText("Vida: "+vida);
-        //}
-        if (vida <= 0)
+        if (other.gameObject.CompareTag("MuroCamara"))
         {
-            Destroy(gameObject);
+            Debug.Log("Muro");
+            camaraB.SetActive(false);
+            camaraRampa.SetActive(true);
         }
+            //if (other.gameObject.CompareTag("Trampa"))
+            //{
+            //    vida-=10;
+            //    textoVida.SetText("Vida: "+vida);
+            //}
+            if (vida <= 0)
+            { 
+            Destroy(gameObject);
+            }
     }
     void Movimiento()
     {
         direccionMove = new Vector3(x, 0, z);
         rb.AddForce((direccionMove).normalized * fuerzaMove, ForceMode.Force);
+    }
+    bool DetectarSuelo()
+    {
+        bool resultado = Physics.Raycast(transform.position, new Vector3(0, -1, 0), distanciaDetecciónSuelo, queEsSuelo);
+        return resultado;
     }
 }
