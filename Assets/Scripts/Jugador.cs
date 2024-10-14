@@ -17,6 +17,9 @@ public class Jugador : MonoBehaviour
     [SerializeField] LayerMask queEsSuelo;
     Vector3 direccionMove, direccionRay;
 
+    [SerializeField] AudioClip sonidoMoneda;
+    [SerializeField] AudioManager manager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,7 @@ public class Jugador : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coleccionable"))
         {
+            manager.ReproducirSonido(sonidoMoneda);
             Destroy(other.gameObject);
             puntuacion++;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
