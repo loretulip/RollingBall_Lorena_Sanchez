@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Juego : MonoBehaviour
 {
-    [SerializeField] int vel;
+    [SerializeField] float vel;
     [SerializeField] Vector3 dir;
     float timer = 0;
 
