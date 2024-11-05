@@ -32,8 +32,11 @@ public class Jugador : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal"); 
         z = Input.GetAxisRaw("Vertical");
         Saltar();
+        if (vida <= 0)
+        {
+            Destroy(gameObject);
+        }
 
-       
     }
     private void FixedUpdate()
     {
@@ -51,30 +54,30 @@ public class Jugador : MonoBehaviour
             }
         }
     }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Coleccionable"))
+        if (other.CompareTag("Coleccionable"))
         {
             manager.ReproducirSonido(sonidoMoneda);
             Destroy(other.gameObject);
             puntuacion++;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
+            Debug.Log("Coleccionable");
         }
-        if (other.gameObject.CompareTag("MuroCamara"))
-        {
-            Debug.Log("Muro");
-            camaraB.SetActive(false);
-            camaraRampa.SetActive(true);
-        }
+
+        //if (other.gameObject.CompareTag("MuroCamara"))
+        //{
+        //    Debug.Log("Muro");
+        //    camaraB.SetActive(false);
+        //    camaraRampa.SetActive(true);
+        //}
             //if (other.gameObject.CompareTag("Trampa"))
             //{
             //    vida-=10;
             //    textoVida.SetText("Vida: "+vida);
             //}
-            if (vida <= 0)
-            { 
-            Destroy(gameObject);
-            }
+          
     }
     void Movimiento()
     {

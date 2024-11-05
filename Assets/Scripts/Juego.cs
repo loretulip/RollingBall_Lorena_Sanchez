@@ -23,8 +23,8 @@ public class Juego : MonoBehaviour
         {
             timer = 0;
             dir *= -1;
-        }
-       
+        }      
+        
         
 
         //if (direccionR=false)
@@ -37,5 +37,5 @@ public class Juego : MonoBehaviour
         //    direccionR = false;
         //}
     }
-
+   
 }
