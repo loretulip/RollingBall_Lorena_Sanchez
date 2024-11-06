@@ -33,6 +33,7 @@ public class MenuPausa : MonoBehaviour
             menuPausa.SetActive(true);
             pausa = true;
             Debug.Log("Juego Pausado");
+
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && pausa == true)
         {
@@ -47,9 +48,8 @@ public class MenuPausa : MonoBehaviour
     }
     public void Reanudar()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        if (pausa == true)
-            Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;        
+        Time.timeScale = 1f;        
         menuPausa.SetActive(false);
         pausa = false;
     }
