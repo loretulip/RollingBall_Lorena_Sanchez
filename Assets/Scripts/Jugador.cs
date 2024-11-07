@@ -14,11 +14,12 @@ public class Jugador : MonoBehaviour
     [SerializeField] Vector3 direcciónSalto;
     [SerializeField] float distanciaDetecciónSuelo;
     [SerializeField] LayerMask queEsSuelo;
-    Vector3 direccionMove, direccionRay;
+     
+    Vector3 direccionMove, direccionRay, inicio;
 
     [Header("Vida y puntuación")]
-    [SerializeField] int vida = 100;
-    [SerializeField] int puntuacion;
+    [SerializeField] public int vida = 100;
+    [SerializeField] public int puntuacion;
 
     [Header("Texto")]
     [SerializeField] TMP_Text textoPuntuacion;
@@ -34,6 +35,9 @@ public class Jugador : MonoBehaviour
 
     [Header("Menus")]
     [SerializeField] private GameObject menuPausa;
+    [SerializeField] public GameObject pantallaMuerte;
+    [SerializeField] public GameObject pantallaHUD;
+
     bool pausa = false;
 
 
@@ -42,7 +46,7 @@ public class Jugador : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;        
 
     }
 
@@ -51,11 +55,7 @@ public class Jugador : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal"); 
         z = Input.GetAxisRaw("Vertical");
-        Saltar();
-        if (vida <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Saltar();        
         ActualizarHUD();
     }
     private void FixedUpdate()
@@ -79,10 +79,23 @@ public class Jugador : MonoBehaviour
         {
             manager.ReproducirSonido(sonidoMoneda);
             Destroy(other.gameObject);
-            puntuacion++;
+            puntuacion+=5;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
             Debug.Log("Coleccionable");
         }
+        if (other.CompareTag("Muerte"))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0.3f;
+            Debug.Log("Muerte");
+            puntuacion = 0;
+            pantallaMuerte.SetActive(true);
+            pantallaHUD.SetActive(false);
+        }
+
+
+
 
         //if (other.gameObject.CompareTag("MuroCamara"))
         //{
@@ -90,12 +103,12 @@ public class Jugador : MonoBehaviour
         //    camaraB.SetActive(false);
         //    camaraRampa.SetActive(true);
         //}
-            //if (other.gameObject.CompareTag("Trampa"))
-            //{
-            //    vida-=10;
-            //    textoVida.SetText("Vida: "+vida);
-            //}
-          
+        //if (other.gameObject.CompareTag("Trampa"))
+        //{
+        //    vida-=10;
+        //    textoVida.SetText("Vida: "+vida);
+        //}
+
     }
     void Movimiento()
     {

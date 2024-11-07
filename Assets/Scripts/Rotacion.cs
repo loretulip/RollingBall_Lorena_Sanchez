@@ -18,7 +18,6 @@ public class Rotacion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.Rotate(dir * vel * Time.deltaTime);
         
     }
 }

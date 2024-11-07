@@ -8,6 +8,7 @@ public class MenuPausa : MonoBehaviour
 
 {
     [SerializeField] private GameObject menuPausa;
+
     bool pausa = false;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class MenuPausa : MonoBehaviour
     {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class MenuPausa : MonoBehaviour
         Pausa();
 
     }
+    
     public void Pausa()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pausa == false)
@@ -52,21 +55,27 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f;        
         menuPausa.SetActive(false);
         pausa = false;
+        
     }
     public void Reiniciar()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (pausa == true)
-            Time.timeScale = 1f;
+        Cursor.visible = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         pausa = false;
     }
+
     public void Salir()
     {
         Application.Quit();
+        Debug.Log("Saliendo...");
     }
     public void MenuPrincipal()
     {
         SceneManager.LoadScene(0);
-    }
+    }    
+   
+
 }
