@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6414460233043877706}
   - component: {fileID: 7465202293923042913}
   - component: {fileID: 7148370227824314041}
+  - component: {fileID: -8156487117783426489}
   m_Layer: 0
   m_Name: Props_16
   m_TagString: Muerte
@@ -85,3 +86,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &-8156487117783426489
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704129765306034611}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8622612
+  m_Center: {x: 0.00056910515, y: 0.010512352, z: 0.0010170937}

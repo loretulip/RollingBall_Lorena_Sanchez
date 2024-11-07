@@ -14,7 +14,7 @@ public class Jugador : MonoBehaviour
     [SerializeField] Vector3 direcciónSalto;
     [SerializeField] float distanciaDetecciónSuelo;
     [SerializeField] LayerMask queEsSuelo;
-     
+
     Vector3 direccionMove, direccionRay, inicio;
 
     [Header("Vida y puntuación")]
@@ -46,16 +46,16 @@ public class Jugador : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;        
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxisRaw("Horizontal"); 
+        x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
-        Saltar();        
+        Saltar();
         ActualizarHUD();
     }
     private void FixedUpdate()
@@ -66,20 +66,20 @@ public class Jugador : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(DetectarSuelo()==true)
+            if (DetectarSuelo() == true)
             {
                 rb.AddForce(direcciónSalto * fuerzaSalto, ForceMode.Impulse);
             }
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Coleccionable"))
         {
             manager.ReproducirSonido(sonidoMoneda);
             Destroy(other.gameObject);
-            puntuacion+=5;
+            puntuacion += 5;
             textoPuntuacion.SetText("Puntuacion: " + puntuacion);
             Debug.Log("Coleccionable");
         }
@@ -124,5 +124,13 @@ public class Jugador : MonoBehaviour
     {
         textoPuntuacion.text = "Puntos: " + puntuacion;
     }
+    void Muerte()
+    {
+        if (CompareTag("Muerte"))
+        {
+            pantallaMuerte.SetActive (true);
+        }
+    }
+
   
 }
