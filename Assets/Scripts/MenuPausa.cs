@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.ShaderData;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class MenuPausa : MonoBehaviour
 
 {
     [SerializeField] private GameObject menuPausa;
+    [SerializeField] public Volume globalVolume;
+    private UnityEngine.Rendering.Universal.DepthOfField depthOfField;
+
+
+    private float normalFocusDistance = 2.06f;
+    private float pausaFocusDistance = 0f;
+
 
     bool pausa = false;
 
@@ -16,14 +26,22 @@ public class MenuPausa : MonoBehaviour
     {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
-        
+        if (globalVolume.profile.TryGet(out depthOfField))
+        {
+            // Inicialmente, establece el valor normal
+            depthOfField.focusDistance.value = normalFocusDistance;
+        }
+        else
+        {
+            Debug.LogError("Depth of Field no encontrado en el perfil del Volume.");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         Pausa();
-
+        FondoBorrosoPausa();
     }
     
     public void Pausa()
@@ -76,6 +94,17 @@ public class MenuPausa : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }    
+    public void FondoBorrosoPausa()
+    {       
+        if (Time.timeScale == 0)
+        {
+            depthOfField.focusDistance.value = pausaFocusDistance;
+        }
+        else
+        {
+            depthOfField.focusDistance.value = normalFocusDistance;
+        }
+    }
    
 
 }

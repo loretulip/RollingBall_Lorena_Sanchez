@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rotacion : MonoBehaviour
 {
     [SerializeField] Vector3 dir;
-    [SerializeField] int vel,fuerzaGiro;
+    [SerializeField] float vel,fuerzaGiro;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()

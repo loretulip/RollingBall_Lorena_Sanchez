@@ -18,16 +18,12 @@ public class Jugador : MonoBehaviour
     Vector3 direccionMove, direccionRay, inicio;
 
     [Header("Vida y puntuación")]
-    [SerializeField] public int vida = 100;
     [SerializeField] public int puntuacion;
 
     [Header("Texto")]
     [SerializeField] TMP_Text textoPuntuacion;
     [SerializeField] TMP_Text textoVida;
-
-    [Header("Cámaras")]
-    [SerializeField] GameObject camaraB;
-    [SerializeField] GameObject camaraRampa;
+       
 
     [Header("Audio")]
     [SerializeField] AudioClip sonidoMoneda;
@@ -94,20 +90,6 @@ public class Jugador : MonoBehaviour
             pantallaHUD.SetActive(false);
         }
 
-
-
-
-        //if (other.gameObject.CompareTag("MuroCamara"))
-        //{
-        //    Debug.Log("Muro");
-        //    camaraB.SetActive(false);
-        //    camaraRampa.SetActive(true);
-        //}
-        //if (other.gameObject.CompareTag("Trampa"))
-        //{
-        //    vida-=10;
-        //    textoVida.SetText("Vida: "+vida);
-        //}
 
     }
     void Movimiento()

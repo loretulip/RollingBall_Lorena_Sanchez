@@ -9,6 +9,7 @@ TagManager:
   - CamaraBack
   - MuroCamara
   - Muerte
+  - Fin
   layers:
   - Default
   - TransparentFX
